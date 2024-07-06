@@ -1,33 +1,29 @@
 <template>
   <div class="page-product">
-    <div class="columns is-multiline">
-      <div class="column is-9">
-        <figure class="image mb-6">
-          <img v-bind:src="product.get_image">
+    <div class="row">
+      <div class="col-md-9">
+        <figure class="figure mb-6">
+          <img :src="product.get_image" class="figure-img img-fluid">
         </figure>
-        <h1 class="title">{{ product.name }}</h1>
+        <h1 class="display-4">{{ product.name }}</h1>
         <p>{{ product.description }}</p>
       </div>
 
-      <div class="column is-3">
-        <h2 class="subtitle">Information</h2>
-        <p><strong>Price:</strong>{{ product.price }}</p>
-        <div class="field has-addons mt-6">
-          <div class="control">
-            <input type="number" class="input" min="1" v-model="quantity">
-          </div>
-          <div class="control">
-            <a class="button is-dark" @click="addToCart">Add to cart</a>
-          </div>
+      <div class="col-md-3">
+        <h2 class="h5">Information</h2>
+        <p><strong>Price:</strong> {{ product.price }}</p>
+        <div class="input-group mt-4">
+          <input type="number" class="form-control" min="1" v-model="quantity">
+          <button class="btn btn-dark" @click="addToCart">Add to cart</button>
         </div>
       </div>
     </div>    
   </div>
 </template>
 
+
 <script>
   import axios from "axios";
-  import { toast } from "bulma-toast"
 
   export default {
     name: 'Product',

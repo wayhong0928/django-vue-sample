@@ -1,13 +1,13 @@
 <template>
   <div class="page-category">
-    <div class="columns is-multiline">
-      <div class="column is-12">
-        <h2 class="is-size-2 has-text-centered">{{ category.name }}</h2>
+    <div class="row">
+      <div class="col-12">
+        <h2 class="display-4 text-center">{{ category.name }}</h2>
       </div>
       <ProductBox
         v-for="product in category.products"
-        v-bind:key="product.id"
-        v-bind:product="product"
+        :key="product.id"
+        :product="product"
       />
     </div>
   </div>
@@ -15,8 +15,7 @@
 
 <script>
 import axios from 'axios';
-import { toast } from 'bulma-toast';
-import ProductBox from '@/components/ProductBox'
+import ProductBox from '@/components/ProductBox';
 
 export default {
   name: 'Category',
@@ -40,30 +39,29 @@ export default {
       }
     }
   },
-  methods:{
+  methods: {
     async getCategory() {
-      const categorySlug = this.$route.params.category_slug
+      const categorySlug = this.$route.params.category_slug;
 
-      this.$store.commit('setIsLoading', true)
+      this.$store.commit('setIsLoading', true);
 
       axios
         .get(`/api/v1/products/${categorySlug}/`)
         .then(response => {
-          this.category = response.data
-          document.title = this.category.name + ' | Djackets'
+          this.category = response.data;
+          document.title = this.category.name + ' | Djackets';
         })
         .catch(error => {
-          console.log(error.response.data)
-          toast({
-            message: 'Something went wrong. Please try again',
-            type: 'is-danger',
-            dismissible: true,
-            pauseOnHover: true,
+          console.log(error.response.data);
+          this.$toast.show('Something went wrong. Please try again', {
+            type: 'danger',
             duration: 2000,
             position: 'bottom-right',
-          })
-        })
-      this.$store.commit('setIsLoading', false)
+            dismissible: true,
+            pauseOnHover: true,
+          });
+        });
+      this.$store.commit('setIsLoading', false);
     }
   }
 }

@@ -1,32 +1,26 @@
 <template>
   <div class="page-log-in">
-    <div class="columns">
-      <div class="column is-4 is-offset-4">
-        <h1 class="title">Log in</h1>
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <h1 class="display-4">Log in</h1>
 
         <form @submit.prevent="submitForm">
-          <div class="field">
-            <label>Username</label>
-            <div class="control">
-              <input type="text" class="input" v-model="username" />
-            </div>
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" v-model="username" />
           </div>
 
-          <div class="field">
-            <label>Password</label>
-            <div class="control">
-              <input type="password" class="input" v-model="password" />
-            </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" v-model="password" />
           </div>
 
-          <div class="notification is-danger" v-if="errors.length">
-            <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
+          <div class="alert alert-danger" v-if="errors.length">
+            <p v-for="error in errors" :key="error">{{ error }}</p>
           </div>
 
-          <div class="field">
-            <div class="control">
-              <button class="button is-dark">Log in</button>
-            </div>
+          <div class="mb-3">
+            <button type="submit" class="btn btn-dark">Log in</button>
           </div>
 
           <hr />

@@ -6,11 +6,15 @@
     <td>${{ item.product.price }}</td>
     <td>
       {{ item.quantity }}
-      <a @click="decrementQuantity(item)">-</a>
-      <a @click="incrementQuantity(item)">+</a>
+      <a href="javascript:void(0);" @click="decrementQuantity(item)" class="ms-2 me-2">-</a>
+      <a href="javascript:void(0);" @click="incrementQuantity(item)" class="ms-2 me-2">+</a>
     </td>
     <td>${{ getItemTotal(item).toFixed(2) }}</td>
-    <td><button class="delete" @click="removeFromCart(item)"></button></td>
+    <td>
+      <button class="btn btn-danger btn-sm" @click="removeFromCart(item)">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    </td>
   </tr>
 </template>
 
@@ -50,3 +54,8 @@
     },
   };
 </script>
+<style>
+td a {
+  text-decoration: none
+}
+</style>

@@ -1,73 +1,73 @@
 <template>
   <div class="wrapper">
-    <nav class="navbar is-dark">
-      <div class="navbar-brand">
-        <router-link to="/" class="navbar-item"><strong>Djackets</strong></router-link>
-        <a
-          class="navbar-burger"
-          aria-label="menu"
-          aria-expanded="false"
-          data-target="navbar-menu"
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <router-link to="/" class="navbar-brand"><strong>Djackets</strong></router-link>
+        <button
+          class="navbar-toggler"
+          type="button"
+          aria-label="Toggle navigation"
           @click="showMobileMenu = !showMobileMenu"
         >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-      <div class="navbar-menu" id="navbar-menu" v-bind:class="{ 'is-active': showMobileMenu }">
-        <div class="navbar-start">
-          <div class="navbar-item">
-            <form methods="get" action="/search">
-              <div class="field has-addons">
-                <div class="control">
-                  <input type="text" class="input" placeholder="What are you looking for?" name="query" />
-                </div>
-                <div class="control">
-                  <button class="button is-success">
-                    <span class="icon">
-                      <i class="fas fa-search">button</i>
-                    </span>
-                  </button>
-                </div>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" v-bind:class="{ show: showMobileMenu }" id="navbar-menu">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <form methods="get" action="/search" class="d-flex">
+                <input type="text" class="form-control me-2" placeholder="What are you looking for?" name="query" />
+                <button class="btn btn-success" type="submit">
+                  <span class="icon">
+                    <i class="fas fa-search">search!</i>
+                  </span>
+                </button>
+              </form>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <router-link to="/summer" class="nav-link">Summer</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/winter" class="nav-link">Winter</router-link>
+            </li>
+            <li class="nav-item">
+              <div class="d-flex align-items-center">
+                <template v-if="$store.state.isAuthenticated">
+                  <router-link to="/my-account" class="btn btn-outline-secondary me-2">My account</router-link>
+                </template>
+                <template v-else>
+                  <router-link to="/log-in" class="btn btn-outline-secondary me-2">Log in</router-link>
+                </template>
+                <router-link to="/cart" class="btn btn-success">
+                  <span class="icon"><i class="fas fa-shopping-cart"></i></span>
+                  <span>Cart({{ cartTotalLength }})</span>
+                </router-link>
               </div>
-            </form>
-          </div>
-        </div>
-        <div class="navbar-end">
-          <router-link to="/summer" class="navbar-item">Summer</router-link>
-          <router-link to="/winter" class="navbar-item">Winter</router-link>
-
-          <div class="navbar-item">
-            <div class="buttons">
-              <template v-if="$store.state.isAuthenticated">
-                <router-link to="/my-account" class="button is-light">My account</router-link>
-              </template>
-              <template v-else>
-                <router-link to="/log-in" class="button is-light">Log in</router-link>
-              </template>
-              <router-link to="/cart" class="button is-success">
-                <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                <span>Cart({{ cartTotalLength }})</span>
-              </router-link>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
 
-    <div class="is-loading-bar has-text-centered" v-bind:class="{ 'is-loading': $store.state.isLoading }">
-      <div class="lds-dual-ring"></div>
+    <div class="text-center" v-bind:class="{ 'is-loading': $store.state.isLoading }">
+      <div class="spinner-border" role="status" v-if="$store.state.isLoading">
+        <span class="visually-hidden">Loading...</span>
+      </div>
     </div>
 
-    <section class="section">
+    <section class="py-5">
       <router-view />
     </section>
-    <footer class="footer">
-      <p class="has-text-centered">Copyright (c) 2024</p>
+    <footer class="footer bg-light text-dark py-4">
+      <div class="container text-center">
+        <p>Copyright (c) 2024</p>
+      </div>
     </footer>
   </div>
 </template>
+
+
 
 <script>
   import axios from "axios";
@@ -107,7 +107,6 @@
 </script>
 
 <style lang="scss">
-  @import "../node_modules/bulma";
   .lds-dual-ring {
     display: inline-block;
     width: 80px;

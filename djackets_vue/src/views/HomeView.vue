@@ -1,23 +1,23 @@
 <template>
   <div class="home">
-    <section class="hero is-medium is-dark mb-6">
-      <div class="hero-body has-text-centered">
-        <p class="title mb-6">
+    <section class="jumbotron jumbotron-fluid bg-light mb-6">
+      <div class="container text-center">
+        <p class="display-4 mb-6">
           Welcome to Djacket
         </p>
-        <p class="subtitle">
+        <p class="lead">
           The best jacket store online
         </p>
       </div>
     </section>
-    <div class="columns is-multiline">
-      <div class="column is-12">
-        <h2 class="is-size-2 has-text-centered">Latest products</h2>
+    <div class="row">
+      <div class="col-12">
+        <h2 class="display-4 text-center">Latest products</h2>
       </div>
       <ProductBox
         v-for="product in latestProducts"
-        v-bind:key="product.id"
-        v-bind:product="product"
+        :key="product.id"
+        :product="product"
       />
     </div>
   </div>

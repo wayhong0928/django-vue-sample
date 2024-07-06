@@ -1,15 +1,16 @@
 <template>
-  <div class="column is-3">
-    <div class="box">
-      <figure class="image mb-4">
-        <img v-bind:src="product.get_thumbnail">
-      </figure>
-      <h3 class="is-size-4">{{ product.name }}</h3>
-      <p class="is-size-6 has-text-grey">${{ product.price }}</p>
-      <RouterLink v-bind:to="product.get_absolute_url" class="button is-dark mt-4">View details</RouterLink>
+  <div class="col-md-3">
+    <div class="card mb-4">
+      <img :src="product.get_thumbnail" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text text-muted">${{ product.price }}</p>
+        <RouterLink :to="product.get_absolute_url" class="btn btn-dark mt-4">View details</RouterLink>
+      </div>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   name: 'ProductBox',

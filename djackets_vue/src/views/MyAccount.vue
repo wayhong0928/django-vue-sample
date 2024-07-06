@@ -1,16 +1,17 @@
 <template>
   <div class="page-my-account">
-    <div class="columns is-multiline">
-      <div class="column is-12">
-        <h1 class="title">My Account</h1>
+    <div class="row">
+      <div class="col-12">
+        <h1 class="display-4">My Account</h1>
       </div>
 
-      <div class="column is-12">
-        <button @click="logout" class="button is-danger">Log out</button>
+      <div class="col-12">
+        <button @click="logout" class="btn btn-danger">Log out</button>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
   import axios from "axios";
